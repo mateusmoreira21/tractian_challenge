@@ -8,10 +8,10 @@ environment:
   sdk: '>=3.4.3 <4.0.0'
 
 dependencies:
-  dio: ^5.2.1
+  dio: ^5.5.0+1
   result_dart: ^1.1.1
   flutter_triple: ^3.0.0
-  flutter_modular: ^6.3.3
+  flutter_modular: ^6.3.4
   flutter_svg: ^2.0.10+1
   flutter:
     sdk: flutter
