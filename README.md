@@ -1,10 +1,10 @@
 # tractian_challenge
 
-Artigo de detalhamento do desafio: [Tractian Challenge](https://tractian.notion.site/Mobile-Software-Engineer-ff31e345bdd348869d6a8b8ea352a96c)
+Detailed article about the challenge: [Tractian Challenge](https://tractian.notion.site/Mobile-Software-Engineer-ff31e345bdd348869d6a8b8ea352a96c)
 
-Para criar um servidor de dados foi utilizado o [Dartion](https://pub.dev/packages/dartion)
+To create a data server, the [Dartion](https://pub.dev/packages/dartion) package was used.
 
-- Para iniciar o servidor de dados, siga os passos:
+- To start the data server, follow these steps:
 
 ### **Commands**
 
@@ -30,10 +30,11 @@ dartion serve
 ```
 
 <br>
-- Para realizar as injeções de dependencia e navegação, foi utilizado o [Modular](https://pub.dev/packages/flutter_modular)
 
-- Para controlar os estados, foi utilizado o [Triple](https://pub.dev/packages/flutter_triple)
+- For dependency injection and navigation, the [Modular](https://pub.dev/packages/flutter_modular) package was used.
 
-- Para o cliente HTTP foi utilizado o [Dio](https://pub.dev/packages/dio)
+- For state management, the [Triple](https://pub.dev/packages/flutter_triple) package was used.
 
-- Para melhor controle e tratativa de erros retornados, foi utilizado o package [Result Dart](https://pub.dev/packages/result_dart)
+- For the HTTP client, the [Dio](https://pub.dev/packages/dio) package was used.
+
+- To better handle and manage returned errors, the  [Result Dart](https://pub.dev/packages/result_dart) package was used.
