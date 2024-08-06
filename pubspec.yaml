@@ -1,0 +1,30 @@
+name: tractian_challenge
+description: "A new Flutter project."
+
+publish_to: 'none' 
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+
+dependencies:
+  dio: ^5.2.1
+  result_dart: ^1.1.1
+  flutter_triple: ^3.0.0
+  flutter_modular: ^6.3.3
+  flutter_svg: ^2.0.10+1
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
+  flutter_lints: ^3.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/

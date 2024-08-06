@@ -1,0 +1,5 @@
+name: Tractian
+port: 3031
+db: db.json
+host: 0.0.0.0
+statics: public/
