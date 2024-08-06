@@ -9,24 +9,26 @@ Para criar um servidor de dados foi utilizado o [Dartion](https://pub.dev/packag
 ### **Commands**
 
 <br>
-     2. Activate Dartion using pub:
+1. Activate Dartion using pub:
 
-     ```
-     dart pub global activate dartion
-     ```
+```
+dart pub global activate dartion
+```
+
 <br>
+2. Updates Dartion's version:
 
-     3. Updates Dartion's version:
+```
+dartion upgrade
+```
 
-     ```
-     dartion upgrade
-     ```
 <br>
-     4. Start server
+3. Start server
 
-     ```
-     dartion serve
-     ```
+```
+dartion serve
+```
+
 <br>
 - Para realizar as injeções de dependencia e navegação, foi utilizado o [Modular](https://pub.dev/packages/flutter_modular)
 
