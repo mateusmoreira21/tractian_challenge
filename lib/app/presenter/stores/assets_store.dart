@@ -1,18 +1,15 @@
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:result_dart/result_dart.dart';
 import 'package:tractian_challenge/app/interaction/repositories/assets_repository.dart';
-import 'package:tractian_challenge/app/interaction/repositories/location_repository.dart';
 import 'package:tractian_challenge/app/presenter/states/assets_state.dart';
 
 class AssetsStore extends Store<AssetsState> {
   final AssetsRepository _assetsRepository;
-  final LocationRepository _locationRepository;
+  // final LocationRepository _locationRepository;
 
-  AssetsStore(this._assetsRepository, this._locationRepository) : super(StartAssetsState());
+  AssetsStore(this._assetsRepository) : super(StartAssetsState());
 
   load(int companyId) async {
-    await _fetchLocationByCompany(companyId);
-
     await _fetchAssetsByCompany(companyId);
 
     update(state.computed());
@@ -29,15 +26,7 @@ class AssetsStore extends Store<AssetsState> {
   _fetchAssetsByCompany(int companyId) async {
     await _assetsRepository
         .getAssetsByCompany(companyId) //
-        .map((assets) => state.setAssets(assets))
-        .mapError(state.toError)
-        .fold(update, update);
-  }
-
-  _fetchLocationByCompany(int companyId) async {
-    await _locationRepository
-        .getLocationsByCompany(companyId) //
-        .map((locations) => state.setLocations(locations))
+        .map((success) => state.setAssets(success.$1, success.$2))
         .mapError(state.toError)
         .fold(update, update);
   }

@@ -11,15 +11,8 @@ sealed class AssetsState {
   final List<TreeModel> trees;
   final List<TreeModel> treesFiltered;
 
-  AssetsState setAssets(List<AssetsModel> gettedAssets) => LoadedAssetsState(
+  AssetsState setAssets(List<AssetsModel> gettedAssets, List<LocationModel> gettedLocations) => LoadedAssetsState(
         assets: gettedAssets,
-        locations: locations,
-        trees: trees,
-        treesFiltered: treesFiltered,
-      );
-
-  AssetsState setLocations(List<LocationModel> gettedLocations) => LoadedAssetsState(
-        assets: assets,
         locations: gettedLocations,
         trees: trees,
         treesFiltered: treesFiltered,
@@ -28,7 +21,7 @@ sealed class AssetsState {
   AssetsState computed() => LoadedAssetsState(
         assets: assets,
         locations: locations,
-        trees: buildTree(),
+        trees: trees,
         treesFiltered: buildTree(),
       );
 
