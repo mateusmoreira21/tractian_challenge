@@ -38,6 +38,9 @@ class _CompanyPageState extends State<CompanyPage> {
             BlendMode.srcIn,
           ),
         ),
+        actions: [
+          IconButton(onPressed: () => store.getAllCompanies(), icon: const Icon(Icons.refresh_rounded)),
+        ],
       ),
       body: Padding(
         padding: context.viewPadding,

@@ -17,6 +17,7 @@ class AssetsRepositoryImpl implements AssetsRepository {
   AsyncResult<(List<AssetsModel>, List<LocationModel>), AppException> getAssetsByCompany(int companyId) async {
     try {
       final response = await _client.get('/companies/$companyId');
+
       List<AssetsModel> assets = (response.data['assets'] as List) //
           .map(AssetsAdapter.fromMap)
           .toList();

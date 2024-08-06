@@ -4,25 +4,28 @@ import 'package:tractian_challenge/app/interaction/models/location_model.dart';
 import 'package:tractian_challenge/app/interaction/models/tree_model.dart';
 
 sealed class AssetsState {
-  AssetsState({required this.assets, required this.locations, required this.trees, required this.treesFiltered});
+  AssetsState({required this.assets, required this.locations, required this.buildedTree, required this.treesFiltered, required this.originalBuilder});
 
   final List<AssetsModel> assets;
   final List<LocationModel> locations;
-  final List<TreeModel> trees;
+  final List<TreeModel> originalBuilder;
+  final List<TreeModel> buildedTree;
   final List<TreeModel> treesFiltered;
 
   AssetsState setAssets(List<AssetsModel> gettedAssets, List<LocationModel> gettedLocations) => LoadedAssetsState(
         assets: gettedAssets,
         locations: gettedLocations,
-        trees: trees,
+        buildedTree: buildedTree,
         treesFiltered: treesFiltered,
+        originalBuilder: originalBuilder,
       );
 
-  AssetsState computed() => LoadedAssetsState(
+  AssetsState computed(List<TreeModel> computedTree) => LoadedAssetsState(
         assets: assets,
         locations: locations,
-        trees: trees,
-        treesFiltered: buildTree(),
+        buildedTree: computedTree,
+        treesFiltered: computedTree,
+        originalBuilder: computedTree,
       );
 
   AssetsState toError(AppException error) => ErrorAssetsState(error.message);
@@ -31,33 +34,36 @@ sealed class AssetsState {
     return LoadedAssetsState(
       assets: assets,
       locations: locations,
-      trees: trees,
-      treesFiltered: filter == "" ? trees : execFilter(filter),
+      buildedTree: buildedTree,
+      treesFiltered: filter == "" ? buildedTree : execFilter(filter),
+      originalBuilder: originalBuilder,
     );
   }
 
-  AssetsState filterByEnergySensors() {
+  AssetsState filterByEnergySensors(List<TreeModel> filtered) {
     return LoadedAssetsState(
       assets: assets,
       locations: locations,
-      trees: execFilter("energy"),
-      treesFiltered: execFilter("energy"),
+      buildedTree: filtered,
+      treesFiltered: filtered,
+      originalBuilder: originalBuilder,
     );
   }
 
-  AssetsState filterByCriticalAlert() => LoadedAssetsState(
-        assets: assets,
-        locations: locations,
-        trees: execFilter("alert"),
-        treesFiltered: execFilter("alert"),
-      );
+  // AssetsState filterByCriticalAlert() => LoadedAssetsState(
+  //       assets: assets,
+  //       locations: locations,
+  //       buildedTree: buildedTree,
+  //       treesFiltered: execFilter("alert"),
+  //     );
 
   AssetsState resetTrees() {
     return LoadedAssetsState(
       assets: assets,
       locations: locations,
-      trees: trees,
-      treesFiltered: buildTree(),
+      buildedTree: originalBuilder,
+      treesFiltered: originalBuilder,
+      originalBuilder: originalBuilder,
     );
   }
 
@@ -66,7 +72,7 @@ sealed class AssetsState {
     return [...locations, ...assets];
   }
 
-  List<TreeModel> buildTree() {
+  Future<List<TreeModel>> buildTree() async {
     final List<TreeModel> rootItems = [];
 
     for (var item in _computedTrees) {
@@ -84,7 +90,7 @@ sealed class AssetsState {
   List<TreeModel> execFilter(String filter) {
     List<TreeModel> filtered = [];
 
-    for (var element in buildTree()) {
+    for (var element in originalBuilder) {
       _filterTreeListForAlert(filtered, element, filter);
     }
 
@@ -110,14 +116,14 @@ sealed class AssetsState {
 }
 
 final class StartAssetsState extends AssetsState {
-  StartAssetsState() : super(assets: [], locations: [], trees: [], treesFiltered: []);
+  StartAssetsState() : super(assets: [], locations: [], buildedTree: [], treesFiltered: [], originalBuilder: []);
 }
 
 final class LoadedAssetsState extends AssetsState {
-  LoadedAssetsState({required super.assets, required super.locations, required super.trees, required super.treesFiltered});
+  LoadedAssetsState({required super.assets, required super.locations, required super.buildedTree, required super.treesFiltered, required super.originalBuilder});
 }
 
 final class ErrorAssetsState extends AssetsState {
   final String message;
-  ErrorAssetsState(this.message) : super(assets: [], locations: [], trees: [], treesFiltered: []);
+  ErrorAssetsState(this.message) : super(assets: [], locations: [], buildedTree: [], treesFiltered: [], originalBuilder: []);
 }
