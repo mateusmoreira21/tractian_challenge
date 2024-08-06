@@ -26,10 +26,16 @@ dartion upgrade
 3. Start server
 
 ```
+cd server
+```
+
+```
 dartion serve
 ```
 
 <br>
+
+After starting your Dartion server, you need to configure your IP address in "lib\app\core\constants".
 
 - For dependency injection and navigation, the [Modular](https://pub.dev/packages/flutter_modular) package was used.
 
